@@ -28,6 +28,10 @@ mesh_refine = @(p) 0.05+0.3*dcircle(p,0,0,0.5);
 [p,t] = distmesh2d(omega,mesh_refine, 0.05, [-1,-1;1,1],[-1,-1;-1,1;1,-1;1,1]);
 
 %Define element properties 
+a = [1 1;1 1];
+f = 1;
+elements = avengers(a, f, p, t);
+[K_e, F_e] = assembler(elements);
 
 %Generate Mesh
 
