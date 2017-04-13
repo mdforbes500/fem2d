@@ -16,5 +16,7 @@ end
 
 %Assembles force vector
 
+%Assemble boundary condition vector
+
 end
 

@@ -37,21 +37,9 @@ classdef Element2D
             element.f_e = f;
            
             %Does it have a boundary face?
-            counter = 0;
             for i = 1:size(e)
-                for j = 1:3
-                    if t(n,j) == e(i,1)
-                        counter = counter + 1;
-                    elseif t(n,j) == e(i,2)
-                        counter = counter + 1;
-                    end
-                end
-            end
-            if counter == 2
-                element.boundary = 1;
-            else
-                element.boundary = 0;
-            end
+                if t(n,1) == e(i,1)
+                    
             
             %Positions of each node as a coordinate list
             %Node 1
@@ -98,19 +86,16 @@ classdef Element2D
             end
         end % end force_vector
         
-        %function Q_e = boundary_conditions(element)
+        function Q_e = boundary_conditions(element)
             %BOUNDARY_CONDITIONS Generates a boundary condition vector for
             %the element class.
             %   Generates a boundary condition vector for the element
             %   class.
-         %   Q_e = zeros(1,3);
-          %  if element.boundary == 1
-           %     for i = 1:3
-            %    end
-            %end
-                    
+            Q_e = zeros(1,3);
+            if element.
+            for i = 1:3
                 
-        %end
+        end
     end %end methods
     
 end %end class

@@ -26,31 +26,17 @@ mesh_refine = @(p) 0.05+0.3*dcircle(p,0,0,0.5);
 
 %Creation and display of initial mesh before manipulation:
 [p,t] = distmesh2d(omega,mesh_refine, 0.05, [-1,-1;1,1],[-1,-1;-1,1;1,-1;1,1]);
+lambda = boundedges(p,t);
 
 %Define element properties 
 a = [1 1;1 1];
 f = 1;
-elements = avengers(a, f, p, t);
+elements = avengers(a, f, p, t, lambda);
+
+%Step 3, 4, and 5: create local stiffness matrices, force vectors, and 
+%boundary conditions; assemble global siffness matrices, force vectors, and
+%boundary conditions
 [K_e, F_e] = assembler(elements);
-
-%Generate Mesh
-
-%Step 3:
-%Generate local stiffness matrices
-
-%Generate local force vectors
-
-%Step 4:
-%Assemble global stiffness matrix
-
-%Assemble global force vector
-
-%Step 5:
-%Apply boundary conditions
-
-%Generate elemental boundary condition vectors
-
-%Assemble global boundary condition vector
 
 %Step 6:
 %Solve matrix equation
