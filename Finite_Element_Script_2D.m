@@ -14,8 +14,8 @@ close all
 %Define domain
 
 %omega is a circle with a hole in it
-%omega = @(p) ddiff(drectangle(p,-1,1,-1,1),dcircle(p,0,0,0.5));
-omega = @(p) drectangle(p, -1,1,-1,1);
+omega = @(p) ddiff(drectangle(p,-1,1,-1,1),dcircle(p,0,0,0.5));
+%omega = @(p) drectangle(p, -1,1,-1,1);
 
 %Step 2:
 %Discretize Domain
@@ -23,11 +23,11 @@ omega = @(p) drectangle(p, -1,1,-1,1);
 %Mesh Refinement Function:
 %creates a larger element size away from the edge of the circlular cutout,
 %and a smaller element size around the hole
-%mesh_refine = @(p) 0.05+0.3*dcircle(p,0,0,0.5);
-mesh_refine = @huniform;
+mesh_refine = @(p) 0.05+0.3*dcircle(p,0,0,0.5);
+%mesh_refine = @huniform;
 
 %Creation and display of initial mesh before manipulation:
-[p,t] = distmesh2d(omega,mesh_refine, 0.8, [-1,-1;1,1],[-1,-1;-1,1;1,-1;1,1]);
+[p,t] = distmesh2d(omega,mesh_refine, 0.05, [-1,-1;1,1],[-1,-1;-1,1;1,-1;1,1]);
 lambda = boundedges(p,t);
 
 %Define element properties 
@@ -38,7 +38,7 @@ elements = avengers(a, f, p, t, lambda);
 %Step 3, 4, and 5: create local stiffness matrices, force vectors, and 
 %boundary conditions; assemble global siffness matrices, force vectors, and
 %boundary conditions
-[K,K_e, F_e] = assembler(elements, t);
+[K,F, K_e, F_e] = assembler(elements, t);
 
 %Step 6:
 %Solve matrix equation
