@@ -1,4 +1,4 @@
-function [K, F, K_e, F_e] = assembler( element_array, t )
+function [K, F] = assembler( element_array, t )
 %ASSEMBLER Assembles the global stiffness matrix for FEM.
 %   Builds cells of the elemental stiffness matrices and elemental force 
 %   vectors, then assembles them through the nodal equivalence principle.

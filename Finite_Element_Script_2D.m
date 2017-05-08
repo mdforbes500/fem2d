@@ -14,7 +14,7 @@ close all
 %Define domain
 
 %omega is a circle with a hole in it
-omega = @(p) ddiff(drectangle(p,-1,1,-1,1),dcircle(p,0,0,0.5));
+omega = @(p) ddiff(drectangle(p,-4,4,-2,2),dcircle(p,0,0,1));
 %omega = @(p) drectangle(p, -1,1,-1,1);
 
 %Step 2:
@@ -23,12 +23,11 @@ omega = @(p) ddiff(drectangle(p,-1,1,-1,1),dcircle(p,0,0,0.5));
 %Mesh Refinement Function:
 %creates a larger element size away from the edge of the circlular cutout,
 %and a smaller element size around the hole
-mesh_refine = @(p) 0.05+0.3*dcircle(p,0,0,0.5);
+mesh_refine = @(p) 0.1+0.25*dcircle(p,0,0,1);
 %mesh_refine = @huniform;
 
 %Creation and display of initial mesh before manipulation:
-[p,t] = distmesh2d(omega,mesh_refine, 0.05, [-1,-1;1,1],[-1,-1;-1,1;1,-1;1,1]);
-lambda = boundedges(p,t);
+[p,t] = distmesh2d(omega,mesh_refine, 0.09, [-4,-2;4,2],[-4,-2;-4,2;4,-2;4,2]);
 
 %Define element properties 
 a = [1 1;1 1];
@@ -38,12 +37,28 @@ elements = avengers(a, f, p, t, lambda);
 %Step 3, 4, and 5: create local stiffness matrices, force vectors, and 
 %boundary conditions; assemble global siffness matrices, force vectors, and
 %boundary conditions
-[K,F, K_e, F_e] = assembler(elements, t);
+[K,F] = assembler(elements, t);
+
+%Create Boundary Condition matrix
+lambda = boundedges(p,t);
+innerBC = 0;
+outerBC = 2*U_0;
+Q = zeros(size(t,1),1);
+for i = 1:size(lambda,1)
+    
+
 
 %Step 6:
-%Solve matrix equation
+%Solve matrix equation at global nodes
+U = K\(F+Q);
+
+%Interpolate between nodes
+
 
 %Setp 7:
 %Post-processing of results
+
+%Creation of streamlines
+
 
 %Ploting 2D graph
