@@ -28,10 +28,11 @@ mesh_refine = @(p) 0.1+0.25*dcircle(p,0,0,1);
 
 %Creation and display of initial mesh before manipulation:
 [p,t] = distmesh2d(omega,mesh_refine, 0.09, [-4,-2;4,2],[-4,-2;-4,2;4,-2;4,2]);
+lambda = boundedges(p,t);
 
 %Define element properties 
-a = [1 1;1 1];
-f = 1;
+a = [1 0;0 1];
+f = 0;
 elements = avengers(a, f, p, t, lambda);
 
 %Step 3, 4, and 5: create local stiffness matrices, force vectors, and 
@@ -40,17 +41,29 @@ elements = avengers(a, f, p, t, lambda);
 [K,F] = assembler(elements, t);
 
 %Create Boundary Condition matrix
-lambda = boundedges(p,t);
-innerBC = 0;
-outerBC = 2*U_0;
-Q = zeros(size(t,1),1);
-for i = 1:size(lambda,1)
-    
+% innerBC = 0;
+% outerBC = 2*U_0;
+% Q = zeros(max(max(t)));
+% for i = 1:size(lambda,1)
+%     for j = 1:size(lambda,2)
+%         for k = 1:size(p,1)
+%             if p(k,1) == -4 %side face
+%                Q() = U_0*p(k,2);
+%             end
+%             if p(k,2) == -2 %upper face
+%                 Q() = 2*U_0;
+%             end
+%             if p(k,2) == 2 %lower face
+%                 Q() = 2*U_0;
+%             end
+%         end
+%     end
+% end
 
 
 %Step 6:
 %Solve matrix equation at global nodes
-U = K\(F+Q);
+% U = K\(F+Q);
 
 %Interpolate between nodes
 
