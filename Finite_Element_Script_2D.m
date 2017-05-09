@@ -41,24 +41,47 @@ elements = avengers(a, f, p, t, lambda);
 [K,F] = assembler(elements, t);
 
 %Create Boundary Condition matrix
-% innerBC = 0;
-% outerBC = 2*U_0;
-% Q = zeros(max(max(t)));
-% for i = 1:size(lambda,1)
-%     for j = 1:size(lambda,2)
-%         for k = 1:size(p,1)
-%             if p(k,1) == -4 %side face
-%                Q() = U_0*p(k,2);
-%             end
-%             if p(k,2) == -2 %upper face
-%                 Q() = 2*U_0;
-%             end
-%             if p(k,2) == 2 %lower face
-%                 Q() = 2*U_0;
-%             end
-%         end
-%     end
-% end
+U_0 = 1;
+Q = zeros(max(max(t)),1);
+for k = 1:size(p,1)
+    if p(k,1) == -4 && p(k,2) > 0 %side face
+        for i = 1:size(lambda,1)
+            for j = 1:2
+                if lambda(i,j) == k
+                    Q(lambda(i,j),1) = U_0*p(k,2)+Q(lambda(i,j),1);
+                end
+            end
+        end
+    end
+    if p(k,1) == -4 && p(k,2) < 0
+        for i = 1:size(lambda,1)
+            for j = 1:2
+                if lambda(i,j) == k
+                    Q(lambda(i,j),1) = -U_0*p(k,2)+Q(lambda(i,j),1);
+                end
+            end
+        end
+    end
+	if p(k,2) == -2 %upper face
+        for i = 1:size(lambda,1)
+            for j = 1:2
+                if lambda(i,j) == k
+                    Q(lambda(i,j),1) = 2*U_0+Q(lambda(i,j),1);
+                end
+            end
+        end
+    end
+	if p(k,2) == 2 %lower face
+        for i = 1:size(lambda,1)
+            for j = 1:2
+                if lambda(i,j) == k
+                    Q(lambda(i,j),1) = 2*U_0+Q(lambda(i,j),1);
+                end
+            end
+        end
+    end
+    
+end
 
 
 %Step 6:
