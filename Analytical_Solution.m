@@ -1,15 +1,15 @@
 % Written by Malcolm Forbes & Jay Park 
 % Analytical Solution Streamlines
 
-U_i = 2;            % Ambient velocity
+U_i = 1;            % Ambient velocity
 a = 1;               % cylinder radius
 
 c = -a*4;            % starting coordinate (x)
 b = a*4;            % ending coordinate (x)
-d = -4;             % starting coordinate (y)
-e = 4;              % ending coordinate (y)
+d = -2;             % starting coordinate (y)
+e = 2;              % ending coordinate (y)
 
-n = a*50;            % number of intervals (step size in grid)
+n = a*20;            % number of intervals (step size in grid)
 
 [x,y] = meshgrid([c:(b-c)/n:b],[d:(e-d)/n:e]'); % Create mesh
 
@@ -38,7 +38,17 @@ t = [0:2*pi/m:2*pi];
 
 %% Streamline plot
 
-contour(x,y,z,50);
+for i=1:2
+    for j =1:21
+        if i == 1
+            z(i,j) = -2;
+        elseif i == 2
+            z(21,j) = 2;
+        end
+    end
+end            
+
+contour(x,y,z,20);
 hold on 
 polar(t,s,'-k');
 title('Stream Lines');
