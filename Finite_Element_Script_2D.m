@@ -1,4 +1,4 @@
-% 2D Finite Element Main Script
+﻿% 2D Finite Element Main Script
 
 %NOTE: This script uses the distmesh package (under the GNU licesnse) created
 %by Pers Olaf-Persson, MIT. Per the GNU license, this script is also
@@ -47,6 +47,8 @@ for i = 1:size(lambda,1)
     for j = 1:size(lambda,2)
         if (p(lambda(i,j),1) >= -0.00001 && p(lambda(i,j),1) <= 0.00001)
             Q(lambda(i,j),1) = U_0;
+        if (p(lambda(i,j),1 >= 7.9998 && p(lambda(i,j),1) <= 8.0001)
+            Q(lambda(i,j),1) = -U_0;
         end
     end
 end
@@ -61,10 +63,10 @@ array = [];
 counter = 1;
 for i = 1:size(lambda,1)
     for j = 1:size(lambda,2)
-        if ~((p(lambda(i,j),1) >= -0.00001 && p(lambda(i,j),1) <= 0.00001) && ((p(lambda(i,j),2) ~= 0) || (p(lambda(i,j),2) ~= 2))) && ~((p(lambda(i,j),1) >= 3.99998 && p(lambda(i,j),1) <= 4.00001) && ((p(lambda(i,j),2) ~= 1) || (p(lambda(i,j),2) ~= 2)))
+        if ~((p(lambda(i,j),1) >= -0.00001 && p(lambda(i,j),1) <= 0.00001) && ((p(lambda(i,j),2) ~= 0) || (p(lambda(i,j),2) ~= 2))) && ~((p(lambda(i,j),1) >= 7.99998 && p(lambda(i,j),1) <= 8.00001) && ((p(lambda(i,j),2) ~= 0) || (p(lambda(i,j),2) ~= 2)))
             array(end +1,1) = lambda(i,j);
         end
-        if (p(lambda(i,j),1) == 4 && p(lambda(i,j),2) == 1) || (p(lambda(i,j),1) == 4 && p(lambda(i,j),2) == 2)
+        if (p(lambda(i,j),1) == 8 && p(lambda(i,j),2) == 1) || (p(lambda(i,j),1) == 8 && p(lambda(i,j),2) == 2)
             array(end+1,1) = lambda(i,j);
         end
     end
