@@ -14,7 +14,7 @@ close all
 %Define domain
 
 %omega is a circle with a hole in it
-omega = @(p) ddiff(drectangle(p,0,4,0,2),dcircle(p,4,0,1));
+omega = @(p) ddiff(drectangle(p,0,8,0,2),dcircle(p,4,0,1));
 
 %Step 2:
 %Discretize Domain
@@ -26,7 +26,7 @@ mesh_refine = @(p) 0.1+0.05*dcircle(p,4,0,1);
 %mesh_refine = @huniform;
 
 %Creation and display of initial mesh before manipulation:
-[p,t] = distmesh2d(omega,mesh_refine, 0.1, [0,0;4,2],[0,0;0,2;3,0;4,1;4,2]);
+[p,t] = distmesh2d(omega,mesh_refine, 0.1, [0,0;4,2],[0,0;0,2;3,0;4,1;5,0;8,0;8,2]);
 [p,t] = fixmesh(p,t);
 lambda = boundedges(p,t);
 
