@@ -66,7 +66,7 @@ for i = 1:size(lambda,1)
         if ~((p(lambda(i,j),1) >= -0.00001 && p(lambda(i,j),1) <= 0.00001) && ((p(lambda(i,j),2) ~= 0) || (p(lambda(i,j),2) ~= 2))) && ~((p(lambda(i,j),1) >= 7.99998 && p(lambda(i,j),1) <= 8.00001) && ((p(lambda(i,j),2) ~= 0) || (p(lambda(i,j),2) ~= 2)))
             array(end +1,1) = lambda(i,j);
         end
-        if (p(lambda(i,j),1) == 8 && p(lambda(i,j),2) == 1) || (p(lambda(i,j),1) == 8 && p(lambda(i,j),2) == 2)
+        if (p(lambda(i,j),1) == 4 && p(lambda(i,j),2) == 1) || (p(lambda(i,j),1) == 8 && p(lambda(i,j),2) == 2)
             array(end+1,1) = lambda(i,j);
         end
     end
