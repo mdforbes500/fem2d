@@ -1,1 +1,7 @@
+name: FEM2D
+
+description: A lightweight 2D finite element algorithm for linear domains.
+
 theme: jekyll-theme-minimal
+
+avatar: https://photos.app.goo.gl/JVKG5UjrV4s6qDvo7
