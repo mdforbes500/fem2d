@@ -1,4 +1,4 @@
-﻿% 2D Finite Element Main Script
+% 2D Finite Element Main Script
 
 %NOTE: This script uses the distmesh package (under the GNU licesnse) created
 %by Pers Olaf-Persson, MIT. Per the GNU license, this script is also
@@ -47,7 +47,8 @@ for i = 1:size(lambda,1)
     for j = 1:size(lambda,2)
         if (p(lambda(i,j),1) >= -0.00001 && p(lambda(i,j),1) <= 0.00001)
             Q(lambda(i,j),1) = U_0;
-        if (p(lambda(i,j),1 >= 7.9998 && p(lambda(i,j),1) <= 8.0001)
+        end
+        if (p(lambda(i,j),1 >= 7.9998 && p(lambda(i,j),1) <= 8.0001))
             Q(lambda(i,j),1) = -U_0;
         end
     end
@@ -82,6 +83,7 @@ F_copy(array) = [];
 U_copy = inv(K_copy)*F_copy;
 
 %Interpolate between nodes
+U = meshgrid();
 
 %Step 7:
 %Post-processing of results

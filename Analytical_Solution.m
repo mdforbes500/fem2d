@@ -14,7 +14,7 @@ n = a*20;            % number of intervals (step size in grid)
 [x,y] = meshgrid([c:(b-c)/n:b],[d:(e-d)/n:e]'); % Create mesh
 
 for i = 1:length(x)
-    for k = 1:length(x);
+    for k = 1:length(x)
         f = sqrt(x(i,k).^2 + y(i,k).^2);
         if f < a
             x(i,k) = 0;
